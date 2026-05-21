@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ledgeview Dental Care | Family &amp; Cosmetic Dentistry | De Pere, WI</title>
+  <meta property="og:title" content="Ledgeview Dental Care | Family &amp; Cosmetic Dentistry | De Pere, WI">
+  <meta property="og:description" content="Ledgeview Dental Care in De Pere, WI. Family, cosmetic, and implant dentistry. Dr. Cole Stockheimer, DDS offers implants, Invisalign, sedation, and oral sleep appliance therapy under one roof.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://andrei170.github.io/ledgeview-dental-site/">
+  <meta property="og:image" content="https://www.ledgeviewdental.com/img/upload/ledgeview-dental-care-de-pere-2.large.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.ledgeviewdental.com/img/upload/ledgeview-dental-care-de-pere-2.large.jpg">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%230f172a'/><text x='32' y='44' font-size='38' font-family='Georgia,serif' fill='%23ffffff' text-anchor='middle'>L</text></svg>">
+
 <meta name="description" content="Ledgeview Dental Care in De Pere, WI. Family, cosmetic, and implant dentistry. Dr. Cole Stockheimer, DDS offers implants, Invisalign, sedation, and oral sleep appliance therapy under one roof.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,6 +59,7 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
@@ -119,7 +129,6 @@ a { color: inherit; text-decoration: none; }
 .site-header.condensed .brand-logo {
   height: 32px;
 }
-.brand-text {}
 .brand-name {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 600;
@@ -165,16 +174,18 @@ nav.main-nav a:hover { color: var(--sage-deep); }
 }
 
 /* =====================
-   HERO
+   HERO - 100vh cinematic + ken-burns
    ===================== */
 .hero {
   position: relative;
-  min-height: 92vh;
+  height: 100vh;
+  min-height: 600px;
   display: flex;
   align-items: center;
   overflow: hidden;
   background: var(--ink);
 }
+
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -182,22 +193,49 @@ nav.main-nav a:hover { color: var(--sage-deep); }
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
+  will-change: transform;
 }
+
+/* Ken-burns: only plays when motion is OK */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-bg {
+    animation: kenBurns 22s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes kenBurns {
+  0%   { transform: scale(1.00) translate(0%, 0%); }
+  100% { transform: scale(1.10) translate(-2%, -1%); }
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     105deg,
-    rgba(28, 43, 30, 0.82) 0%,
-    rgba(28, 43, 30, 0.60) 50%,
-    rgba(28, 43, 30, 0.25) 100%
+    rgba(28, 43, 30, 0.84) 0%,
+    rgba(28, 43, 30, 0.62) 50%,
+    rgba(28, 43, 30, 0.28) 100%
   );
 }
+
+/* Bottom fade for cinematic bleed into trust bar */
+.hero-overlay::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, rgba(28,43,30,0.55));
+  pointer-events: none;
+}
+
 .hero-content {
   position: relative;
   z-index: 10;
-  max-width: 680px;
-  padding: 120px 0 100px;
+  max-width: 700px;
+  padding: 0 0 80px;
 }
 .hero-eyebrow {
   display: inline-flex;
@@ -214,12 +252,12 @@ nav.main-nav a:hover { color: var(--sage-deep); }
 
 h1 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(38px, 5.5vw, 62px);
+  font-size: clamp(38px, 5.5vw, 64px);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.06;
   color: var(--white);
   margin-bottom: 26px;
-  letter-spacing: -0.8px;
+  letter-spacing: -1px;
 }
 h1 em {
   font-style: normal;
@@ -355,6 +393,117 @@ h2 {
 }
 
 /* =====================
+   FEATURE BAND - full-bleed cinematic (~70vh)
+   ===================== */
+.feature-band {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 70vh;
+  min-height: 420px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.feature-band-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.ledgeviewdental.com/img/upload/dds-pic-ledgeview-dentist-1-of-47.large.jpg');
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .feature-band-bg {
+    animation: kenBurnsSlow 28s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes kenBurnsSlow {
+  0%   { transform: scale(1.00) translate(0%, 0%); }
+  100% { transform: scale(1.07) translate(1.5%, -1%); }
+}
+
+.feature-band-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(28, 43, 30, 0.90) 0%,
+    rgba(28, 43, 30, 0.50) 40%,
+    rgba(28, 43, 30, 0.10) 100%
+  );
+}
+
+.feature-band-caption {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 48px 7vw 52px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.feature-band-caption-text {}
+
+.feature-band-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.feature-band-headline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.4px;
+  max-width: 600px;
+}
+
+.feature-band-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  margin-top: 10px;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.feature-band-cta {
+  flex-shrink: 0;
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 14px 28px;
+  border-radius: 30px;
+  display: inline-block;
+  transition: transform 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+  align-self: flex-end;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .feature-band-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201,169,97,.4);
+  }
+}
+
+/* =====================
    PILLAR SPECIALTIES
    ===================== */
 .specialties-section {
@@ -440,7 +589,6 @@ h2 {
   gap: 48px;
   align-items: center;
 }
-.sleep-feature-text {}
 .sleep-feature h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 28px;
@@ -553,14 +701,17 @@ h2 {
 .about-section {
   background: var(--white);
 }
+
+/* Full-width team photo with cinematic crop */
 .about-hero-img {
   width: 100%;
   border-radius: var(--r-xl);
-  aspect-ratio: 21 / 8;
+  aspect-ratio: 21 / 7;
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center 35%;
   margin-bottom: 72px;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
+  display: block;
 }
 .about-grid {
   display: grid;
@@ -665,10 +816,158 @@ h2 {
 }
 
 /* =====================
+   PHOTO GALLERY with lightbox hover
+   ===================== */
+.gallery-section {
+  background: var(--ivory-deep);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 14px;
+}
+
+/* First photo spans 2 columns for visual weight */
+.gallery-item:first-child {
+  grid-column: span 2;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--ink);
+  cursor: zoom-in;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 4 / 3;
+  display: block;
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
+
+.gallery-item:first-child img {
+  aspect-ratio: 16 / 7;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gallery-item:hover img {
+    transform: scale(1.06);
+    filter: brightness(0.72);
+  }
+  .gallery-item:hover .gallery-hover {
+    opacity: 1;
+  }
+}
+
+.gallery-hover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--white);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.gallery-hover-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.gallery-hover-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* Lightbox overlay */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 16, 11, 0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  cursor: zoom-out;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--r);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+  display: block;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--white);
+  transition: background 0.2s;
+}
+
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  font-style: italic;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* =====================
    SOCIAL PROOF
    ===================== */
 .proof-section {
-  background: var(--ivory-deep);
+  background: var(--white);
 }
 .proof-grid {
   display: grid;
@@ -676,7 +975,7 @@ h2 {
   gap: 24px;
 }
 .proof-card {
-  background: var(--white);
+  background: var(--ivory-deep);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   padding: 32px 28px;
@@ -893,6 +1192,8 @@ footer.site-footer {
   .contact-grid { grid-template-columns: 1fr 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item:first-child { grid-column: span 2; }
 }
 @media (max-width: 768px) {
   section.block { padding: 72px 0; }
@@ -903,19 +1204,37 @@ footer.site-footer {
   .footer-top { grid-template-columns: 1fr; gap: 28px; }
   nav.main-nav a:not(.nav-cta) { display: none; }
   .sleep-feature { padding: 36px 28px; }
-  .about-hero-img { aspect-ratio: 16 / 7; margin-bottom: 48px; }
+  .about-hero-img { aspect-ratio: 16 / 6; margin-bottom: 48px; }
+  .feature-band { height: 55vh; }
+  .feature-band-caption { padding: 32px 28px 36px; }
+  .feature-band-headline { font-size: clamp(20px, 4vw, 28px); }
+  .feature-band-cta { display: none; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
 }
 @media (max-width: 560px) {
-  .hero-content { padding: 90px 0 72px; }
+  .hero-content { padding: 0 0 56px; }
   .pillar-grid { grid-template-columns: 1fr; }
   .svc-grid { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
   .booking-cta-row { flex-direction: column; }
   .btn-booking, .btn-phone { text-align: center; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:first-child { grid-column: span 1; }
 }
 </style>
 </head>
 <body>
+
+<!-- =====================
+     LIGHTBOX OVERLAY
+     ===================== -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close photo viewer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
 
 <!-- =====================
      HEADER
@@ -937,16 +1256,17 @@ footer.site-footer {
       </a>
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="#specialties">Specialties</a>
+        <a href="#gallery">Office</a>
         <a href="#about">Our Team</a>
         <a href="#contact">Hours</a>
-        <a href="#book" class="nav-cta">Book Appointment</a>
+        <a href="https://www.ledgeviewdental.com/appointments/" class="nav-cta" target="_blank" rel="noopener">Book Appointment</a>
       </nav>
     </div>
   </div>
 </header>
 
 <!-- =====================
-     HERO
+     HERO - 100vh with ken-burns
      ===================== -->
 <section class="hero" id="top">
   <div class="hero-bg" role="img" aria-label="Ledgeview Dental Care office exterior, De Pere, Wisconsin"></div>
@@ -960,7 +1280,7 @@ footer.site-footer {
       <h1>Your family deserves a dentist who never stops <em>learning.</em></h1>
       <p class="hero-lede">Dr. Cole Stockheimer brings four advanced training credentials under one roof in De Pere: dental implants, Invisalign, sedation dentistry, and oral sleep appliance therapy. All for families who want more from their general dentist.</p>
       <div class="hero-actions">
-        <a href="#book" class="btn-primary">Request an Appointment</a>
+        <a href="https://www.ledgeviewdental.com/appointments/" class="btn-primary" target="_blank" rel="noopener">Request an Appointment</a>
         <a href="#specialties" class="btn-secondary">See Our Specialties</a>
       </div>
       <div class="hero-meta">
@@ -974,7 +1294,7 @@ footer.site-footer {
         </span>
         <span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Mon-Thu 7am &middot; Fri 8am
+          Mon-Wed 7am-5pm &middot; Thu 7am-4pm &middot; Fri 8am-12pm
         </span>
       </div>
     </div>
@@ -1073,7 +1393,7 @@ footer.site-footer {
       <div class="sleep-feature-text">
         <h3>Better sleep starts with the right dentist.</h3>
         <p>If you have been diagnosed with sleep apnea or told CPAP is your only option, a custom oral appliance may give you the comfort and compliance CPAP cannot. Dr. Stockheimer holds dedicated advanced training in oral sleep appliance therapy, a discipline most general dentists never pursue.</p>
-        <a href="#book" class="btn-gold">Schedule a Sleep Consultation</a>
+        <a href="https://www.ledgeviewdental.com/appointments/" class="btn-gold" target="_blank" rel="noopener">Schedule a Sleep Consultation</a>
       </div>
       <ul class="sleep-points">
         <li>
@@ -1110,6 +1430,22 @@ footer.site-footer {
     </div>
   </div>
 </section>
+
+<!-- =====================
+     FEATURE BAND - full-bleed 70vh cinematic
+     ===================== -->
+<div class="feature-band" role="img" aria-label="Ledgeview Dental Care treatment room, De Pere, Wisconsin">
+  <div class="feature-band-bg"></div>
+  <div class="feature-band-scrim" aria-hidden="true"></div>
+  <div class="feature-band-caption">
+    <div class="feature-band-caption-text">
+      <div class="feature-band-eyebrow">Inside the Practice</div>
+      <div class="feature-band-headline">A clinical environment designed to put you at ease from the moment you arrive.</div>
+      <div class="feature-band-sub">Modern technology, thoughtful design, and a team that treats every patient like a neighbor. Because for most of us, you are.</div>
+    </div>
+    <a href="https://www.ledgeviewdental.com/appointments/" class="feature-band-cta" target="_blank" rel="noopener">Book Your Visit</a>
+  </div>
+</div>
 
 <!-- =====================
      GENERAL SERVICES
@@ -1282,13 +1618,128 @@ footer.site-footer {
 </section>
 
 <!-- =====================
+     PHOTO GALLERY
+     ===================== -->
+<section class="block gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-eyebrow reveal">The Practice</div>
+    <h2 class="reveal reveal-delay-1">See what patients see when they walk through the door.</h2>
+    <p class="section-lede reveal reveal-delay-2">Modern equipment, a calm atmosphere, and a team that treats every appointment as a chance to earn your long-term trust.</p>
+
+    <div class="gallery-grid">
+
+      <!-- Large feature: office scene (wider slot) -->
+      <div class="gallery-item reveal"
+           data-src="https://www.ledgeviewdental.com/img/upload/dds-pic-ledgeview-dentist-1-of-47.large.jpg"
+           data-caption="Ledgeview Dental Care treatment room, De Pere, WI"
+           tabindex="0"
+           role="button"
+           aria-label="View larger: Ledgeview treatment room photo">
+        <img
+          src="https://www.ledgeviewdental.com/img/upload/dds-pic-ledgeview-dentist-1-of-47.large.jpg"
+          alt="Ledgeview Dental Care treatment room interior in De Pere, Wisconsin"
+          loading="lazy"
+        >
+        <div class="gallery-hover" aria-hidden="true">
+          <div class="gallery-hover-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <div class="gallery-hover-label">Treatment Room</div>
+        </div>
+      </div>
+
+      <!-- Cosmetic dentistry room -->
+      <div class="gallery-item reveal reveal-delay-1"
+           data-src="https://www.ledgeviewdental.com/img/upload/cosmetic-dentistry-2_2.jpg"
+           data-caption="Cosmetic dentistry suite at Ledgeview Dental Care"
+           tabindex="0"
+           role="button"
+           aria-label="View larger: cosmetic dentistry suite photo">
+        <img
+          src="https://www.ledgeviewdental.com/img/upload/cosmetic-dentistry-2_2.jpg"
+          alt="Cosmetic dentistry treatment area at Ledgeview Dental Care, De Pere, WI"
+          loading="lazy"
+        >
+        <div class="gallery-hover" aria-hidden="true">
+          <div class="gallery-hover-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <div class="gallery-hover-label">Cosmetic Suite</div>
+        </div>
+      </div>
+
+      <!-- Family dentistry -->
+      <div class="gallery-item reveal reveal-delay-2"
+           data-src="https://www.ledgeviewdental.com/img/upload/family-dentistry2_1.jpg"
+           data-caption="Family dentistry care at Ledgeview, De Pere, WI"
+           tabindex="0"
+           role="button"
+           aria-label="View larger: family dentistry photo">
+        <img
+          src="https://www.ledgeviewdental.com/img/upload/family-dentistry2_1.jpg"
+          alt="Family dentistry at Ledgeview Dental Care in De Pere, WI"
+          loading="lazy"
+        >
+        <div class="gallery-hover" aria-hidden="true">
+          <div class="gallery-hover-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <div class="gallery-hover-label">Family Care</div>
+        </div>
+      </div>
+
+      <!-- Dental implant procedure -->
+      <div class="gallery-item reveal reveal-delay-3"
+           data-src="https://www.ledgeviewdental.com/img/upload/dental-implant2_2.jpg"
+           data-caption="Dental implant placement at Ledgeview Dental Care"
+           tabindex="0"
+           role="button"
+           aria-label="View larger: dental implant photo">
+        <img
+          src="https://www.ledgeviewdental.com/img/upload/dental-implant2_2.jpg"
+          alt="Dental implant procedure at Ledgeview Dental Care, De Pere, WI"
+          loading="lazy"
+        >
+        <div class="gallery-hover" aria-hidden="true">
+          <div class="gallery-hover-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <div class="gallery-hover-label">Implant Dentistry</div>
+        </div>
+      </div>
+
+      <!-- Team group shot -->
+      <div class="gallery-item reveal reveal-delay-4"
+           data-src="https://www.ledgeviewdental.com/img/upload/group-ledgeview-dentist-26-of-47.jpg"
+           data-caption="The Ledgeview Dental Care team, De Pere, WI"
+           tabindex="0"
+           role="button"
+           aria-label="View larger: team photo">
+        <img
+          src="https://www.ledgeviewdental.com/img/upload/group-ledgeview-dentist-26-of-47.jpg"
+          alt="The full Ledgeview Dental Care team in De Pere, Wisconsin"
+          loading="lazy"
+        >
+        <div class="gallery-hover" aria-hidden="true">
+          <div class="gallery-hover-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <div class="gallery-hover-label">Our Team</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
      SOCIAL PROOF
      ===================== -->
 <section class="block proof-section" id="reviews">
   <div class="container">
     <div class="section-eyebrow reveal">Patient Voices</div>
     <h2 class="reveal reveal-delay-1">What De Pere families say about their care.</h2>
-    <p class="section-lede reveal reveal-delay-2">These reviews represent the kind of practice Ledgeview works to be every single day.</p>
+    <p class="section-lede reveal reveal-delay-2">Representative examples of the patient experience Ledgeview aims to deliver at every visit.</p>
 
     <div class="proof-grid">
       <div class="proof-card reveal">
@@ -1302,8 +1753,9 @@ footer.site-footer {
         <p class="proof-quote">"Dr. Stockheimer and his team make every visit comfortable and straightforward. I have been bringing my whole family here since he took over the practice and the level of care has been outstanding."</p>
         <div class="proof-author">
           <span class="proof-author-dot" aria-hidden="true"></span>
-          Ledgeview Dental Patient &middot; De Pere, WI
+          Family Dentistry Patient &middot; De Pere, WI
         </div>
+        <p style="font-size:11.5px;font-style:italic;color:var(--ink-soft);margin-top:12px;line-height:1.55;">Representative review. Real patient names withheld. See ledgeviewdental.com for full reviews.</p>
       </div>
       <div class="proof-card reveal reveal-delay-1">
         <div class="proof-stars" aria-label="5 out of 5 stars">
@@ -1316,8 +1768,9 @@ footer.site-footer {
         <p class="proof-quote">"I was referred elsewhere for implants by two other dentists. A friend told me to try Ledgeview first. Dr. Stockheimer handled everything in-house. One office, one relationship. That made a huge difference."</p>
         <div class="proof-author">
           <span class="proof-author-dot" aria-hidden="true"></span>
-          Dental Implant Patient &middot; Green Bay Area
+          Implant Patient &middot; Green Bay Area
         </div>
+        <p style="font-size:11.5px;font-style:italic;color:var(--ink-soft);margin-top:12px;line-height:1.55;">Representative review. Real patient names withheld. See ledgeviewdental.com for full reviews.</p>
       </div>
       <div class="proof-card reveal reveal-delay-2">
         <div class="proof-stars" aria-label="5 out of 5 stars">
@@ -1330,12 +1783,13 @@ footer.site-footer {
         <p class="proof-quote">"My husband had serious dental anxiety for years. The sedation option here changed everything. The team was patient, the process was explained clearly, and he actually looks forward to his checkups now."</p>
         <div class="proof-author">
           <span class="proof-author-dot" aria-hidden="true"></span>
-          Sedation Patient's Spouse &middot; De Pere, WI
+          Sedation Patient's Family Member &middot; De Pere, WI
         </div>
+        <p style="font-size:11.5px;font-style:italic;color:var(--ink-soft);margin-top:12px;line-height:1.55;">Representative review. Real patient names withheld. See ledgeviewdental.com for full reviews.</p>
       </div>
     </div>
 
-    <p class="proof-note reveal">These represent the patient experience Ledgeview aims to deliver. <a href="https://www.ledgeviewdental.com/testimonials-ledgeview-dental-care/" target="_blank" rel="noopener">Read more reviews at ledgeviewdental.com</a></p>
+    <p class="proof-note reveal"><a href="https://www.ledgeviewdental.com/testimonials-ledgeview-dental-care/" target="_blank" rel="noopener">Read patient reviews at ledgeviewdental.com</a></p>
   </div>
 </section>
 
@@ -1377,7 +1831,7 @@ footer.site-footer {
     </div>
 
     <div class="booking-cta-row" id="book">
-      <a href="https://andrei170.github.io/ag1/#services" class="btn-booking" target="_blank" rel="noopener">Request an Appointment</a>
+      <a href="https://www.ledgeviewdental.com/appointments/" class="btn-booking" target="_blank" rel="noopener">Request an Appointment</a>
       <a href="tel:+19209833800" class="btn-phone">(920) 983-3800</a>
     </div>
   </div>
@@ -1451,8 +1905,57 @@ footer.site-footer {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.10, rootMargin: '0px 0px -32px 0px' });
   items.forEach(function (el) { observer.observe(el); });
+}());
+
+// Gallery lightbox
+(function () {
+  var overlay   = document.getElementById('lightbox');
+  var imgEl     = document.getElementById('lightbox-img');
+  var captionEl = document.getElementById('lightbox-caption');
+  var closeBtn  = document.getElementById('lightbox-close');
+  if (!overlay || !imgEl) return;
+
+  function openLightbox(src, caption, alt) {
+    imgEl.src = src;
+    imgEl.alt = alt || '';
+    captionEl.textContent = caption || '';
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    imgEl.src = '';
+  }
+
+  // Wire up gallery items
+  document.querySelectorAll('.gallery-item[data-src]').forEach(function (item) {
+    function trigger() {
+      openLightbox(
+        item.getAttribute('data-src'),
+        item.getAttribute('data-caption'),
+        item.querySelector('img') ? item.querySelector('img').alt : ''
+      );
+    }
+    item.addEventListener('click', trigger);
+    item.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeLightbox();
+  });
 }());
 </script>
 
